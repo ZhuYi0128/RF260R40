@@ -34,6 +34,8 @@
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
             <Button Grid.Row="3" Content="Read" Click="btn_Read" ></Button>
+            <Label Content="读取位数" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Height="28"/>
+            <TextBox HorizontalAlignment="Left" Height="28" Margin="58,0,0,0" Grid.Row="1"  Name="tb_ReadLength" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
         </Grid>
         <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Name="tb_WriteText" TextWrapping="Wrap"></TextBox>
         <Grid Grid.Row="5" Grid.Column="5">
@@ -45,6 +47,8 @@
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
             <Button Grid.Row="3" Content="Write" Click="btn_Write"></Button>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="59,0,0,0" Grid.Row="1" Name="tb_WriteLength" TextWrapping="Wrap"  VerticalAlignment="Top" Width="61"/>
+            <Label Content="写入位数" HorizontalAlignment="Left" Height="23" Grid.Row="1" VerticalAlignment="Top" Width="59"/>
         </Grid>
     </Grid>
 </Window>
