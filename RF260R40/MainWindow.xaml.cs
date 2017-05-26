@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +27,7 @@ namespace RF260R40
         //SET-RS232.....02 3041 3030 3030 3030 3035 3030 3030 3030 3031 03
 
         // 设置RS232 目前调试不好使  zy 
-        Byte[] btSETRS232 = { 0x02, 0x30, 0x41, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x35, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x31, 0x03 };
+        Byte[] btSETRS232 = { 0x02, 0x30, 0x35, 0x42, 0x42, 0x30, 0x30, 0x30, 0x31, 0x30, 0x30, 0x30, 0x30, 0x03 };
 
         //故障复位......     02    30    41    30    30    30    30    30    30    38    35    30    32    30    30    30    30    30    31    30    30    30    31    03
         // 故障复位   zy     02    30    41    30    30    30    30    30    30    38    35    30    32    30    30    30    30    30    31    30    30    30    31    03 
@@ -61,7 +62,49 @@ namespace RF260R40
         }
         private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
         {
-            string indata = com.ReadExisting();
+            string indata = "";
+            while (true)
+            {
+
+                string m = com.ReadExisting();
+                Thread.Sleep(50);
+                if (m != "")
+                {
+                    indata = indata + m;
+                }
+                else
+                {
+
+                    break;
+                }
+            }
+
+            string receiveData = "";
+
+            if (indata != "")
+            {
+                if (indata.Contains("750200000070") && indata != "")
+                {
+                    receiveData = indata;
+                    string[] rData = receiveData.Split(new string[] { "70", "00" }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string a in rData) ;
+                    receiveData = rData[1];
+
+                    byte[] buff = new byte[receiveData.Length / 2];
+                    int index = 0;
+                    for (int i = 0; i < receiveData.Length; i += 2)
+                    {
+                        buff[index] = Convert.ToByte(receiveData.Substring(i, 2), 16);
+                        ++index;
+                    }
+                    string result = Encoding.Default.GetString(buff);
+
+                    indata = result;
+                }
+            }
+
+
+
             this.tb_ReadText.Dispatcher.Invoke(new Action(delegate { this.tb_ReadText.Text += indata; }));
         }
         //RFID初始化
@@ -88,8 +131,6 @@ namespace RF260R40
             }
         }
         //写入按钮
-
-
         private void btn_Write(object sender, RoutedEventArgs e)
         {
             try
@@ -99,36 +140,51 @@ namespace RF260R40
                 List<byte> btWrite0 = new List<byte>();
 
                 // zy 获取界面写入数据位数
-                string WriteLength = this.tb_WriteLength.Text;
-                int Writelen = int.Parse(WriteLength);
+                //string WriteLength = this.tb_WriteLength.Text;
+                // int Writelen = int.Parse(WriteLength);
 
                 //获取输入字符串长度
                 int num = writeString.Length;
 
                 // zy 判断输入字符串长度和数据位数是否一样
-                //if (num == Writelen)
-               // {
-                    //判断字符串长度
-                    if (num > 0 && num < 248)
+                // if (num == Writelen)
+                //{
+                //判断字符串长度
+                if (num > 0 && num < 248)
+                {
+
+
+
+                    byte[] byteArray1 = System.Text.ASCIIEncoding.Default.GetBytes(writeString);
+                    StringBuilder ABC = new StringBuilder();
+                    foreach (byte b in byteArray1)
                     {
+                        ABC.Append(b.ToString("x"));
+                    }
+                    //MessageBox.Show(ABC.ToString());
 
-                        //转换界面数据
-                        byte[] byteArray1 = System.Text.ASCIIEncoding.Default.GetBytes(writeString);
-                        StringBuilder ABC = new StringBuilder();
-                        foreach(byte b in byteArray1)
-                        {
-                            ABC.Append(b.ToString("x"));
-                        }
-                        //MessageBox.Show(ABC.ToString());
-
-                        string WriteString1 = ABC.ToString();
-
-                        string Wstring = WriteString1 + "41";
+                    writeString = ABC.ToString();
 
 
-                        byte[] byteArray = System.Text.Encoding.ASCII.GetBytes(Wstring);
-                        int n = byteArray.Length/2;
 
+                    int numws = writeString.Length;
+                    int n1;
+                    for (n1 = 0; n1 < 224 - numws; n1++)
+                    {
+                        writeString = writeString + "0";
+                    }
+
+
+                    writeString = writeString.ToUpper();
+
+                    //转换界面数据
+                    byte[] byteArray = System.Text.Encoding.ASCII.GetBytes(writeString);
+                    int n = byteArray.Length;
+                    if (n % 2 == 1)//如果为奇数
+                    {
+                        n++;
+                        n = n / 2;
+                        //净字节长度
                         int m = n + 5;
                         string strm = String.Format("{0:X}", m);
                         if (strm.Length == 1)
@@ -137,106 +193,53 @@ namespace RF260R40
                         if (strn.Length == 1)
                             strn = "0" + strn;
 
-                        //byte[] byteArray2 = System.Text.ASCIIEncoding.Default.GetBytes(WriteString1);
-                        //StringBuilder BCD = new StringBuilder();
-                        //foreach (byte b in byteArray2)
-                        //{
-                        //    BCD.Append(b.ToString("x"));
-                        //}
-                        ////MessageBox.Show(BCD.ToString());
-
-                        //string WriteString3 = BCD.ToString();
-
-                        //int numint = WriteString3.Length;
-
-                        
-
-                        //for (int n = 0; n < 247 - num; n++)
-                        //{
-                        //    Wstring = Wstring + "3330";
-                        //}
-
-                        int l = Wstring.Length;
-
-                        Wstring = strm + "01000000" + strn + Wstring;
-
+                        // zy  当输入为奇数时，不能补空格，补空格  当前设置 补0 
+                        writeString = strm + "01000000" + strn + writeString + "0";
+                        //编写指令
                         btWrite0.Add(0x02);
-                       byte[] bt001 = System.Text.Encoding.ASCII.GetBytes(Wstring);
-                        //byte[] bt001 = System.Text.Encoding.Default.GetBytes(Wstring); 
+                        byte[] bt001 = System.Text.Encoding.ASCII.GetBytes(writeString);
                         for (int i = 0; i < bt001.Length; i++)
                             btWrite0.Add(bt001[i]);
                         btWrite0.Add(0x03);
-
-
-
-
-
-
-
-
-                        //int n = byteArray1.Length;
-
-
-                        //if (n % 2 == 1)//如果为奇数
-                        //{
-                        //    n++;
-                        //    n = n / 2;
-                        //    //净字节长度
-                        //    int m = n + 5;
-                        //    string strm = String.Format("{0:X}", m);
-                        //    if (strm.Length == 1)
-                        //        strm = "0" + strm;
-                        //    string strn = String.Format("{0:X}", n);
-                        //    if (strn.Length == 1)
-                        //        strn = "0" + strn;
-
-                        //    // zy  当输入为奇数时，不能补空格，补空格  当前设置 补0 
-                        //    writeString = strm + "01000000" + strn + writeString + "0";
-                        //    //编写指令
-                        //    btWrite0.Add(0x02);
-                        //    byte[] bt001 = System.Text.Encoding.ASCII.GetBytes(writeString);
-                        //    for (int i = 0; i < bt001.Length; i++)
-                        //        btWrite0.Add(bt001[i]);
-                        //    btWrite0.Add(0x03);
-                        //}
-                        //else//如果为偶数
-                        //{
-                        //    n = n / 2;
-                        //    //净字节长度
-                        //    int m = n + 5;
-                        //    string strm = String.Format("{0:X}", m);
-                        //    if (strm.Length == 1)
-                        //        strm = "0" + strm;
-                        //    string strn = String.Format("{0:X}", n);
-                        //    if (strn.Length == 1)
-                        //        strn = "0" + strn;
-                        //    writeString = strm + "01000000" + strn + writeString;
-                        //    //编写指令
-                        //    btWrite0.Add(0x02);
-                        //    byte[] bt001 = System.Text.Encoding.ASCII.GetBytes(writeString);
-                        //    for (int i = 0; i < bt001.Length; i++)
-                        //        btWrite0.Add(bt001[i]);
-                        //    btWrite0.Add(0x03);
-                        //}
-                        //格式转换
-                        btWrite = btWrite0.ToArray();
                     }
-                    else
+                    else//如果为偶数
                     {
-                        MessageBox.Show("写入错误！数据为空或者超过248字节，请检查输入数据！");
+                        n = n / 2;
+                        //净字节长度
+                        int m = n + 5;
+                        string strm = String.Format("{0:X}", m);
+                        if (strm.Length == 1)
+                            strm = "0" + strm;
+                        string strn = String.Format("{0:X}", n);
+                        if (strn.Length == 1)
+                            strn = "0" + strn;
+                        writeString = strm + "01000000" + strn + writeString;
+                        //编写指令
+                        btWrite0.Add(0x02);
+                        byte[] bt001 = System.Text.Encoding.ASCII.GetBytes(writeString);
+                        for (int i = 0; i < bt001.Length; i++)
+                            btWrite0.Add(bt001[i]);
+                        btWrite0.Add(0x03);
                     }
-                    //写数据........02 3044 3031 3030 3030 3030 4638 ______ 03
-                    com.Write(btWrite, 0, btWrite.Length);
-                    //写确认........02 3042 3031 3030 03
-                    //读数据
-                    //界面显示数据
-                    //this.tb_ReadText.Text = null;
-                    //com.Write(btRead, 0, btRead.Length);
-                //}
-                //else
-                //{
-                //    MessageBox.Show("写入错误！数据长度与数据位数不一致，请检查输入数据！");
-                //}
+                    //格式转换
+                    btWrite = btWrite0.ToArray();
+                }
+                else
+                {
+                    MessageBox.Show("写入错误！数据为空或者超过248字节，请检查输入数据！");
+                }
+                //写数据........02 3044 3031 3030 3030 3030 4638 ______ 03
+                com.Write(btWrite, 0, btWrite.Length);
+                //写确认........02 3042 3031 3030 03
+                //读数据
+                //界面显示数据
+                //this.tb_ReadText.Text = null;
+                //com.Write(btRead, 0, btRead.Length);
+                // }
+                // else
+                // {
+                //     MessageBox.Show("写入错误！数据长度与数据位数不一致，请检查输入数据！");
+                //  }
             }
             catch (System.Exception error)
             {
@@ -255,10 +258,11 @@ namespace RF260R40
                 // zy 用46 38 读全部 会报错 增加设置读取位数
 
                 // zy 获取界面写入数据位数
-                string ReadLength = this.tb_ReadLength.Text;
-                int Readlen = int.Parse(ReadLength);
+                //string ReadLength = this.tb_ReadLength.Text;
+                //int Readlen = int.Parse(ReadLength);
                 // zy 数据是由高低位组成 数据的长度是数据位数的一半
-                Readlen = Readlen / 2;
+                //Readlen = Readlen / 2;
+                int Readlen = 112;
                 string Rlen = String.Format("{0:X}", Readlen);
                 if (Rlen.Length == 1)
                     Rlen = "0" + Rlen;
@@ -273,7 +277,7 @@ namespace RF260R40
 
                 btRead1 = btRead0.ToArray();
 
-                com.Write(btRead, 0, btRead.Length);
+                com.Write(btRead1, 0, btRead1.Length);
                 //System.Threading.Thread.Sleep(500);
                 //MessageBox.Show(com.ReadExisting());
                 //读确认........02 3044 3032 3030 3030 3030 4638 ______ 03
@@ -309,5 +313,7 @@ namespace RF260R40
             com.Write(btSETRS232, 0, btSETRS232.Length);
             //MessageBox.Show(com.ReadExisting());
         }
+
+
     }
 }

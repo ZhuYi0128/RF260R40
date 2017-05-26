@@ -39,16 +39,29 @@ C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0506\R
 C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0506\RF260R40\obj\Debug\RF260R40.Properties.Resources.resources
 C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0506\RF260R40\obj\Debug\RF260R40.csproj.GenerateResource.Cache
 C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0506\RF260R40\obj\Debug\RF260R40.csprojResolveAssemblyReference.cache
-C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0524\RF260R40\bin\Debug\RF260R40.exe.config
-C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0524\RF260R40\obj\Debug\RF260R40.exe
-C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0524\RF260R40\obj\Debug\RF260R40.pdb
-C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0524\RF260R40\bin\Debug\RF260R40.exe
-C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0524\RF260R40\bin\Debug\RF260R40.pdb
-C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0524\RF260R40\obj\Debug\RF260R40.csprojResolveAssemblyReference.cache
-C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0524\RF260R40\obj\Debug\MainWindow.baml
-C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0524\RF260R40\obj\Debug\MainWindow.g.cs
-C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0524\RF260R40\obj\Debug\App.g.cs
-C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0524\RF260R40\obj\Debug\RF260R40_MarkupCompile.cache
-C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0524\RF260R40\obj\Debug\RF260R40.g.resources
-C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0524\RF260R40\obj\Debug\RF260R40.Properties.Resources.resources
-C:\Users\Administrator\Desktop\速采\RS232( ASCII ) 方案\RF260R40 - zy 0524\RF260R40\obj\Debug\RF260R40.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\RF260R40 - zy 0506\RF260R40\bin\Debug\RF260R40.exe.config
+C:\Users\Administrator\Desktop\RF260R40 - zy 0506\RF260R40\obj\Debug\RF260R40.exe
+C:\Users\Administrator\Desktop\RF260R40 - zy 0506\RF260R40\obj\Debug\RF260R40.pdb
+C:\Users\Administrator\Desktop\RF260R40 - zy 0506\RF260R40\bin\Debug\RF260R40.exe
+C:\Users\Administrator\Desktop\RF260R40 - zy 0506\RF260R40\bin\Debug\RF260R40.pdb
+C:\Users\Administrator\Desktop\RF260R40 - zy 0506\RF260R40\obj\Debug\MainWindow.baml
+C:\Users\Administrator\Desktop\RF260R40 - zy 0506\RF260R40\obj\Debug\MainWindow.g.cs
+C:\Users\Administrator\Desktop\RF260R40 - zy 0506\RF260R40\obj\Debug\App.g.cs
+C:\Users\Administrator\Desktop\RF260R40 - zy 0506\RF260R40\obj\Debug\RF260R40_MarkupCompile.cache
+C:\Users\Administrator\Desktop\RF260R40 - zy 0506\RF260R40\obj\Debug\RF260R40.g.resources
+C:\Users\Administrator\Desktop\RF260R40 - zy 0506\RF260R40\obj\Debug\RF260R40.Properties.Resources.resources
+C:\Users\Administrator\Desktop\RF260R40 - zy 0506\RF260R40\obj\Debug\RF260R40.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\RF260R40 - zy 0506\RF260R40\obj\Debug\RF260R40.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\RF260R40 - zy 05-25\RF260R40\bin\Debug\RF260R40.exe.config
+C:\Users\Administrator\Desktop\RF260R40 - zy 05-25\RF260R40\obj\Debug\RF260R40.exe
+C:\Users\Administrator\Desktop\RF260R40 - zy 05-25\RF260R40\obj\Debug\RF260R40.pdb
+C:\Users\Administrator\Desktop\RF260R40 - zy 05-25\RF260R40\bin\Debug\RF260R40.exe
+C:\Users\Administrator\Desktop\RF260R40 - zy 05-25\RF260R40\bin\Debug\RF260R40.pdb
+C:\Users\Administrator\Desktop\RF260R40 - zy 05-25\RF260R40\obj\Debug\RF260R40.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\RF260R40 - zy 05-25\RF260R40\obj\Debug\MainWindow.baml
+C:\Users\Administrator\Desktop\RF260R40 - zy 05-25\RF260R40\obj\Debug\MainWindow.g.cs
+C:\Users\Administrator\Desktop\RF260R40 - zy 05-25\RF260R40\obj\Debug\App.g.cs
+C:\Users\Administrator\Desktop\RF260R40 - zy 05-25\RF260R40\obj\Debug\RF260R40_MarkupCompile.cache
+C:\Users\Administrator\Desktop\RF260R40 - zy 05-25\RF260R40\obj\Debug\RF260R40.g.resources
+C:\Users\Administrator\Desktop\RF260R40 - zy 05-25\RF260R40\obj\Debug\RF260R40.Properties.Resources.resources
+C:\Users\Administrator\Desktop\RF260R40 - zy 05-25\RF260R40\obj\Debug\RF260R40.csproj.GenerateResource.Cache
