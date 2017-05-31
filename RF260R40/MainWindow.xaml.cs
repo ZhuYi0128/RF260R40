@@ -83,10 +83,10 @@ namespace RF260R40
 
             if (indata != "")
             {
-                if (indata.Contains("750200000070") && indata != "")
+                if (indata.Contains("750200000070"))
                 {
                     receiveData = indata;
-                    string[] rData = receiveData.Split(new string[] { "70", "00" }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] rData = receiveData.Split(new string[] { "750200000070", "1011" }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string a in rData) ;
                     receiveData = rData[1];
 
@@ -150,7 +150,7 @@ namespace RF260R40
                 // if (num == Writelen)
                 //{
                 //判断字符串长度
-                if (num > 0 && num < 248)
+                if (num > 0 && num < 110)
                 {
 
 
@@ -165,7 +165,7 @@ namespace RF260R40
 
                     writeString = ABC.ToString();
 
-
+                    writeString = writeString + "1011";
 
                     int numws = writeString.Length;
                     int n1;
@@ -291,18 +291,23 @@ namespace RF260R40
         //初始化
         private void btn_Init(object sender, RoutedEventArgs e)
         {
-            this.tb_ReadText.Text = null;
             //初始化
+            this.tb_ReadText.Text = null;
             com.Write(btINIT, 0, btINIT.Length);
             //MessageBox.Show(com.ReadExisting());
         }
         //故障复位
         private void btn_Reset(object sender, RoutedEventArgs e)
         {
-            this.tb_ReadText.Text = null;
             //故障复位
+            this.tb_ReadText.Text = null;
             com.Write(btRESET, 0, btRESET.Length);
 
+            Thread.Sleep(1000);
+
+            //初始化
+            this.tb_ReadText.Text = null;
+            com.Write(btINIT, 0, btINIT.Length);
             //MessageBox.Show(com.ReadExisting());
         }
         //设置
